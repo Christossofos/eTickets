@@ -1,13 +1,13 @@
-﻿@model Actor
+﻿@model Director
 
 @{
-    ViewData["Title"] = "Delete actor";
+    ViewData["Title"] = "Delete director";
 }
 
 <div class="row text">
     <div class="col-md-8 offset-2">
         <p>
-            <h1>Delete confirmation for actor @Model.FullName</h1>
+            <h1>Delete confirmation for director @Model.FullName</h1>
         </p>
         <div class="col-md-8 offset-2">
                 <div class="form-group text-center">
@@ -30,11 +30,11 @@
                 </div>
 
                 <div class="form-group">
-                    <form asp-action="DeleteConfirmed">
+                    <form asp-action="Delete">
                         <input type="hidden" asp-for="Id" />
                         <input type="submit" value="Confirm" class=" btn btn-danger float-right" />
                     </form>
-                    <a class="btn btn-outline-secondary" asp-action="Index">Show All Actors</a>
+                    <a class="btn btn-outline-secondary" asp-action="Index">Show All Directors</a>
                 </div>
         </div>
     </div>

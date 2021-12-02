@@ -7,7 +7,11 @@ using System.Threading.Tasks;
 
 namespace eTickets.Data.Services
 {
-    public interface IActorsService : IEntityBaseRepository<Actor>
+    public class DirectorsService : EntityBaseRepository<Director>, IDirectorsService
     {
+        public DirectorsService(AppDbContext context) : base(context)
+        {
+
+        }
     }
 }
