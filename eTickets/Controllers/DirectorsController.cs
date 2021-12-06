@@ -35,7 +35,7 @@ namespace eTickets.Controllers
         }
 
         // Get: directors/create
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }

@@ -1,5 +1,8 @@
 ﻿@*Define model*@
+@using System.Globalization;
+
 @model IEnumerable<Movie>
+
 @*Define ViewData*@
 @{
     ViewData["Title"] = "List of Movies";
@@ -18,13 +21,13 @@
                             <p class="card-text">
                                 <h5 class="card-title">
                                     @item.Name
-                                    @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
-                                    {
+                                    @*@if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                                    {*@
                                         <a class="text-white float-right" asp-action="Edit" asp-route-id="@item.Id">
                                             <i class="bi bi-pencil-square">
                                             </i>
                                         </a>
-                                    }
+                                   @* } *@
                                 </h5>
                             </p>
                         </div>
@@ -35,11 +38,11 @@
                     <div class="col-md-6">
                         <div class="card-body">
                             <p class="card-text">@item.Description</p>
-                                <p class="card-text"><b>Cinema: </b>@item.Cinema.Name</p>
-                                <p class="card-text"><b>Category: </b>@item.MovieCategory</p>
-                                <p class="card-text"><b>Start Date: </b>@item.StartDate.ToString("d")</p>
-                                <p class="card-text"><b>End Date: </b>@item.EndDate.ToString("d")</p>
-                                <p class="card-text">
+                            <p class="card-text"><b>Cinema: </b>@item.Cinema.Name</p>
+                            <p class="card-text"><b>Category: </b>@item.MovieCategory</p>
+                            <p class="card-text"><b>Start Date: </b>@item.StartDate.ToString("d")</p>
+                            <p class="card-text"><b>End Date: </b>@item.EndDate.ToString("d")</p>
+                            <p class="card-text">
                                 <b>Status: </b>
                                 @if (DateTime.Now >= item.StartDate && DateTime.Now <= item.EndDate)
                                 {
@@ -64,9 +67,9 @@
                                 </a>
                                 <a class="btn btn-success text-white @((DateTime.Now > item.EndDate) ? "disabled" : "")"
                                    asp-controller="Orders"
-                                   asp-action="AddItemToShopingCart"
+                                   asp-action="AddToShoppingCart"
                                    asp-route-id="@item.Id">
-                                    <i class="bi bi-cart-plus"></i> Add to Cart (Price @item.Price.ToString("c"))>
+                                    <i class="bi bi-cart-plus"></i> Add to Cart (Price @item.Price.ToString("c", new CultureInfo("gr-GR")))
                                 </a>
                             </p>
                         </div>
@@ -76,5 +79,5 @@
         </div>
     }
 </div>
-@*
-    @await Html.PartialAsync("_CreateItem", "Movies") *@
+
+@await Html.PartialAsync("_CreateItem", "Movies")

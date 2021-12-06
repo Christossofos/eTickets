@@ -1,7 +1,7 @@
 ﻿@model Actor
 
 @{
-    ViewData["Title"] = "Details of the actors";
+    ViewData["Title"] = "Actors Details";
 }
 
 <div class="row text">
@@ -14,8 +14,8 @@
                     <img class="border-info rounded-circle" style="max-width: 150px;" id="ProfilePicturePreview" />
                 </div>
                 <div class="form-group">
-                    <label asp-for="ProfilePictureURL" class="control-label"></label>
-                    <input asp-for="ProfilePictureURL" class="form-control" readonly />
+                    <label asp-for="ProfilePictureURL" class="control-label" hidden></label>
+                    <input asp-for="ProfilePictureURL" class="form-control" hidden />
                     <span asp-validation-for="ProfilePictureURL" class="text-danger"></span>
                 </div>
                 <div class="form-group">

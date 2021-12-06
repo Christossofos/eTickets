@@ -25,7 +25,7 @@ namespace eTickets.Controllers
         }
 
         // Get: Actors/Create. No data manipulation doesn't need to be async.
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }
@@ -63,9 +63,8 @@ namespace eTickets.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("Id, FullName, ProfilePictureURL, Bio")] Actor actor)
         {
             if (!ModelState.IsValid)
-            {
                 return View(actor);
-            }
+            
             await _service.UpdateAsync(id, actor);
             return RedirectToAction(nameof(Index));
         }

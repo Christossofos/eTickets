@@ -25,7 +25,7 @@ namespace eTickets.Controllers
         }
 
         // Get: Cinemas/Create
-        public async Task<IActionResult> Create()
+        public IActionResult Create()
         {
             return View();
         }

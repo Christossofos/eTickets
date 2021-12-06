@@ -12,20 +12,19 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Movies" asp-action="Index">eTickets</a>
+                <a class="navbar-brand" asp-controller="Movies" asp-action="Index">eTickets</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
                         aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between justify-content-between">
-                    <ul class="navbar-nav flex-grow-0">
-
-                        <li class="navbar-nav flex-grow-1">
+                    <ul class="navbar-nav flex-grow-1">
+                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-controller="Movies"asp-action="Index"><i class="bi bi-film"></i>Movies</a>
                         </li>
 
                         <li class="nav-item dropdown flex-grow-1">
-                            <a class="btn btn-secondary dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:beige; color:dimgray;">
+                            <a class="btn btn-secondary dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:beige; color:dimgray;">
                                 <i class="bi bi-gear" style="color:dimgrey"></i> Management
                             </a>
 
@@ -34,14 +33,31 @@
                                 <a class="dropdown-item" asp-controller="Actors" asp-action="Index"><i class="bi bi-person-square"></i> Actors</a>
                                 <a class="dropdown-item" asp-controller="Directors" asp-action="Index"><i class="bi bi-headset"></i> Directors</a>
                             </div>
+
                         </li>
                     </ul>
 
                     <form class="form-inline my-2 my-lg-0" asp-controller="Movies" asp-action="Filter" style="margin-right: 25px; background-color:beige;">
                         <input name="searchString" type="text" class="form-control" placeholder="Search for a movie..." style="background-color: beige; color: dimgray;" />
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
-
                     </form>
+                    
+                    <ul class="navbar-nav">
+                        @await Component.InvokeAsync("ShoppingCartSummary")
+                    </ul>
+                        @*User Profile section*@
+                <div class="dropdown">
+                    <button class="btn btn-outline-success dropdown-toggle" type="button" id="profile-btn" data-toggle="dropdown" aria-expanded="false">
+                        <i class="bi bi-person-badge"></i> Hello
+                    </button>
+                    <ul class="dropdown-menu" aria-labelledby="profile-btn">
+                        <li>
+                            <a class="dropdown-item" asp-controller="Orders" asp-action="Index">
+                                <i class="bi bi-list"></i> Orders
+                            </a>
+                        </li>
+                    </ul>
+                </div>
                 </div>
             </div>
         </nav>
