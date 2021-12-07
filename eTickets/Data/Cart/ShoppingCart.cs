@@ -80,6 +80,9 @@ namespace eTickets.Data.Cart
             var items = await _context.ShoppingCartItems.Where(n => n.ShoppingCartId == ShoppingCartId).ToListAsync();
             _context.ShoppingCartItems.RemoveRange(items);
             await _context.SaveChangesAsync();
+
+            // After order is completed make shoppingcart list 0 so the shopping cart icon does not appear when order is completed
+            ShoppingCartItems = new List<ShoppingCartItem>();
         }
     }
 }

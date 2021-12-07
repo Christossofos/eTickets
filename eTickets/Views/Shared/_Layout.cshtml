@@ -23,18 +23,21 @@
                             <a class="nav-link text-dark" asp-controller="Movies" asp-action="Index"><i class="bi bi-film"></i>Movies</a>
                         </li>
 
-                        <li class="nav-item dropdown flex-grow-1">
-                            <a class="btn btn-secondary dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:beige; color:dimgray;">
-                                <i class="bi bi-gear" style="color:dimgrey"></i> Management
-                            </a>
+                        @if (User.Identity.IsAuthenticated && User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item dropdown flex-grow-1">
+                                <a class="btn btn-secondary dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" style="background-color:beige; color:dimgray;">
+                                    <i class="bi bi-gear" style="color:dimgrey"></i> Management
+                                </a>
 
-                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                                <a class="dropdown-item" asp-controller="Cinemas" asp-action="Index"><i class="bi bi-camera-reels"></i> Cinemas</a>
-                                <a class="dropdown-item" asp-controller="Actors" asp-action="Index"><i class="bi bi-person-square"></i> Actors</a>
-                                <a class="dropdown-item" asp-controller="Directors" asp-action="Index"><i class="bi bi-headset"></i> Directors</a>
-                            </div>
+                                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" asp-controller="Cinemas" asp-action="Index"><i class="bi bi-camera-reels"></i>Cinemas</a>
+                                    <a class="dropdown-item" asp-controller="Actors" asp-action="Index"><i class="bi bi-person-square"></i>Actors</a>
+                                    <a class="dropdown-item" asp-controller="Directors" asp-action="Index"><i class="bi bi-headset"></i>Directors</a>
+                                </div>
+                            </li>
+                        }
 
-                        </li>
                     </ul>
 
                     <form class="form-inline my-2 my-lg-0" asp-controller="Movies" asp-action="Filter" style="margin-right: 25px; background-color:beige;">
@@ -45,10 +48,8 @@
                     <ul class="navbar-nav">
                         @await Component.InvokeAsync("ShoppingCartSummary")
                     </ul>
-
                     @*@await Html.RenderPartialAsync("_Identity")*@
                     <partial name="_Identity.cshtml"/>
-
                 </div>
             </div>
         </nav>

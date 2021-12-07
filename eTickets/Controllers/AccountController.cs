@@ -1,9 +1,11 @@
 ﻿using eTickets.Data;
+using eTickets.Data.Cart;
 using eTickets.Data.Static;
 using eTickets.Data.ViewModels;
 using eTickets.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,16 +17,24 @@ namespace eTickets.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ShoppingCart _shoppingCart;
         private readonly AppDbContext _context;
 
-        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, AppDbContext context)
+        public AccountController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, AppDbContext context, ShoppingCart shoppingCart)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _context = context;
+            _shoppingCart = shoppingCart;
         }
 
         public IActionResult Login() => View(new LoginVM());
+
+        public async Task<IActionResult> Users()
+        {
+            var users = await _context.Users.ToListAsync();
+            return View(users);
+        }
 
         [HttpPost]
         public async Task<IActionResult> Login(LoginVM loginVM)
@@ -80,7 +90,13 @@ namespace eTickets.Controllers
         public async Task<IActionResult> Logout()
         {
             await _signInManager.SignOutAsync();
+            await _shoppingCart.ClearShoppingCartAsync();
             return RedirectToAction("Index", "Movies");
+        }
+
+        public IActionResult AccessDenied(string returnUrl)
+        {
+            return View();
         }
     }
 }
